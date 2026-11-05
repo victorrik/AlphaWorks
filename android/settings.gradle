@@ -4,3 +4,8 @@ extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autoli
 rootProject.name = 'AlphaWorks'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+
+// WatermelonDB JSI module (not autolinked; the bridge module in native/android is).
+include ':watermelondb-jsi'
+project(':watermelondb-jsi').projectDir =
+    new File(rootProject.projectDir, '../node_modules/@nozbe/watermelondb/native/android-jsi')

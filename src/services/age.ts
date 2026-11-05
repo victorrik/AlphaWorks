@@ -1,0 +1,90 @@
+export type GeneratedRecord = { birthDate: string; age: number };
+
+function isInt(n: number): boolean {
+  return Number.isInteger(n);
+}
+
+// Fecha de nacimiento aleatoria para una edad entera dada, siempre < now.
+// Elige un día aleatorio dentro de la ventana que mantiene la edad cumplida
+// == age: desde el día posterior al último cumpleaños que daría age+1, hasta
+// hoy. Así la edad calculada coincide con la objetivo y la fecha es < now.
+export function randomBirthDate(age: number, now: Date): Date {
+  // Último día posible: nació hoy hace `age` años (cumple hoy) -> edad == age.
+  const latest = new Date(now.getFullYear() - age, now.getMonth(), now.getDate());
+  // Primer día posible: un día después de cumplir age+1 años atrás, es decir
+  // nacido (age+1) años antes + 1 día; antes de eso la edad sería age+1.
+  const earliest = new Date(now.getFullYear() - age - 1, now.getMonth(), now.getDate());
+  earliest.setDate(earliest.getDate() + 1);
+
+  const spanMs = latest.getTime() - earliest.getTime();
+  const birth = new Date(earliest.getTime() + Math.floor(Math.random() * (spanMs + 1)));
+
+  // El extremo joven del rango (latest) sería igual a now cuando age es la edad
+  // de alguien nacido hoy; forzamos estrictamente < now.
+  if (birth.getTime() >= now.getTime()) {
+    birth.setDate(birth.getDate() - 1);
+  }
+  return birth;
+}
+
+// Edad cumplida a partir de una fecha de nacimiento.
+export function ageOf(birth: Date, now: Date): number {
+  let age = now.getFullYear() - birth.getFullYear();
+  const beforeBirthday =
+    now.getMonth() < birth.getMonth() ||
+    (now.getMonth() === birth.getMonth() && now.getDate() < birth.getDate());
+  if (beforeBirthday) {
+    age -= 1;
+  }
+  return age;
+}
+
+// Formato dd-mm-aaaa.
+export function formatDate(d: Date): string {
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yyyy = String(d.getFullYear());
+  return `${dd}-${mm}-${yyyy}`;
+}
+
+// Req 1: N registros con edad aleatoria en [min, max].
+export function generateByRange(
+  min: number,
+  max: number,
+  count: number,
+  now: Date,
+): GeneratedRecord[] {
+  if (!isInt(min) || !isInt(max) || !isInt(count)) {
+    throw new Error('Mínimo, máximo y cantidad deben ser enteros.');
+  }
+  if (min < 0) {
+    throw new Error('La edad mínima debe ser mayor o igual a 0.');
+  }
+  if (max < min) {
+    throw new Error('La edad máxima debe ser mayor o igual a la mínima.');
+  }
+  if (count < 1) {
+    throw new Error('La cantidad debe ser un entero mayor o igual a 1.');
+  }
+
+  const records: GeneratedRecord[] = [];
+  for (let i = 0; i < count; i++) {
+    const age = min + Math.floor(Math.random() * (max - min + 1));
+    const birth = randomBirthDate(age, now);
+    records.push({ birthDate: formatDate(birth), age });
+  }
+  return records;
+}
+
+// Req 2: un registro por edad de la lista.
+export function generateByAges(ages: number[], now: Date): GeneratedRecord[] {
+  if (ages.length === 0) {
+    throw new Error('La lista de edades no puede estar vacía.');
+  }
+  for (const age of ages) {
+    if (!isInt(age) || age < 0) {
+      throw new Error('Cada edad debe ser un entero mayor o igual a 0.');
+    }
+  }
+  return ages.map(age => ({ birthDate: formatDate(randomBirthDate(age, now)), age }));
+}

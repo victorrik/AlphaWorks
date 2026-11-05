@@ -1,7 +1,33 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AgeCalculatorScreen } from '../screens/AgeCalculatorScreen';
 import { HomeScreen } from '../screens/HomeScreen';
+import { RangeGeneratorScreen } from '../screens/RangeGeneratorScreen';
 
-// shortcut: sin librería de navegación aún; cuando haya más de una pantalla,
-// instalar @react-navigation/native y reemplazar este render directo.
+export type RootStackParamList = {
+  Home: undefined;
+  RangeGenerator: undefined;
+  AgeCalculator: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
 export function RootNavigator() {
-  return <HomeScreen />;
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'AlphaWorks' }} />
+        <Stack.Screen
+          name="RangeGenerator"
+          component={RangeGeneratorScreen}
+          options={{ title: 'Generador por rango' }}
+        />
+        <Stack.Screen
+          name="AgeCalculator"
+          component={AgeCalculatorScreen}
+          options={{ title: 'Calculador por edades' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

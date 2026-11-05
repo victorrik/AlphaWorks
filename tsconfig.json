@@ -1,5 +1,13 @@
 {
   "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    // Los campos de los modelos WatermelonDB los define el decorador en el
+    // prototipo, no el constructor; sin esto tsc pide `!` en cada campo y ese
+    // `!` rompe el transform de Babel del preset de RN.
+    "strictPropertyInitialization": false
+  },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules", "**/Pods"]
 }
