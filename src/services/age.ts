@@ -47,13 +47,8 @@ export function formatDate(d: Date): string {
   return `${dd}-${mm}-${yyyy}`;
 }
 
-// Req 1: N registros con edad aleatoria en [min, max].
-export function generateByRange(
-  min: number,
-  max: number,
-  count: number,
-  now: Date,
-): GeneratedRecord[] {
+// Reglas de rango compartidas por generateByRange y el generador de CURP.
+export function validateRange(min: number, max: number, count: number): void {
   if (!isInt(min) || !isInt(max) || !isInt(count)) {
     throw new Error('Mínimo, máximo y cantidad deben ser enteros.');
   }
@@ -66,6 +61,16 @@ export function generateByRange(
   if (count < 1) {
     throw new Error('La cantidad debe ser un entero mayor o igual a 1.');
   }
+}
+
+// Req 1: N registros con edad aleatoria en [min, max].
+export function generateByRange(
+  min: number,
+  max: number,
+  count: number,
+  now: Date,
+): GeneratedRecord[] {
+  validateRange(min, max, count);
 
   const records: GeneratedRecord[] = [];
   for (let i = 0; i < count; i++) {

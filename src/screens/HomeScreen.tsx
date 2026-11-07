@@ -29,6 +29,13 @@ export function HomeScreen() {
       >
         Calculador por edades
       </Button>
+      <Button
+        type="primary"
+        block
+        onPress={() => navigation.navigate('CurpGenerator')}
+      >
+        Generador de CURP
+      </Button>
     </View>
   );
 }

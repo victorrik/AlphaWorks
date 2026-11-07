@@ -1,0 +1,384 @@
+{
+  "pbtResults": {
+    "2.4 Property test en `src/services/person.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794015397848
+    },
+    "2.5 Property test en `src/services/person.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794015449365
+    },
+    "2.6 Property test en `src/services/person.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794016190364
+    },
+    "2.7 Property test estadístico en `src/services/person.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794016246569
+    },
+    "2.8 Property test en `src/services/person.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794016319850
+    }
+  },
+  "executionHistory": {
+    "1.1 Crear `src/services/curp.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015009889
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015024758
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015264644
+      }
+    ],
+    "2.1 Instalar `@faker-js/faker@^9`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015009965
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015025742
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015265865
+      }
+    ],
+    "2.2 Extraer `validateRange` en `src/services/age.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010014
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015026514
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015264217
+      }
+    ],
+    "2.3 Crear `src/services/person.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010067
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015276688
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015350365
+      }
+    ],
+    "3. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010107
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016333158
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794018845408
+      }
+    ],
+    "4.1 Esquema v2 y migración": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010139
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015027335
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015266496
+      }
+    ],
+    "4.2 Modelo `CurpRecord` y registro en la base": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010215
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015277584
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015349423
+      }
+    ],
+    "4.3 Crear `src/db/curpRecordRepo.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010244
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015357269
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015408014
+      }
+    ],
+    "5.1 Crear `src/components/CurpRecordList.tsx`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010273
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015358155
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015408438
+      }
+    ],
+    "5.2 Crear `src/screens/CurpGeneratorScreen.tsx`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010322
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015414644
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015504586
+      }
+    ],
+    "5.3 Ruta y botón de inicio": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010377
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016154092
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016201905
+      }
+    ],
+    "6.1 Correr `npx tsc --noEmit`, `npx eslint src App.tsx` y `npm test`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015010428
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016333200
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794018846470
+      }
+    ],
+    "1.2 Escribir `src/services/curp.test.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015014934
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015278328
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015351125
+      }
+    ],
+    "2.4 Property test en `src/services/person.test.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015015689
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015356500
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015407962
+      }
+    ],
+    "2.5 Property test en `src/services/person.test.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015016899
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015412720
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015504403
+      }
+    ],
+    "2.6 Property test en `src/services/person.test.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015017767
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016154201
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016202700
+      }
+    ],
+    "2.7 Property test estadístico en `src/services/person.test.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015018883
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016204569
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016282707
+      }
+    ],
+    "2.8 Property test en `src/services/person.test.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015019702
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016284287
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016333063
+      }
+    ],
+    "4.4 Escribir `src/db/curpRecordRepo.test.ts`": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015020428
+      },
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015413776
+      },
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016283490
+      }
+    ],
+    "1. Lógica pura de CURP": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015264684
+      }
+    ],
+    "2. Generación de personas": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015350404
+      }
+    ],
+    "4. Persistencia": [
+      {
+        "executionId": "35a3fa64-946c-4929-9114-c421973c34bd",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794015408055
+      }
+    ],
+    "5. UI y navegación": [
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794016202002
+      }
+    ],
+    "6. Verificación final": [
+      {
+        "executionId": "4f4e0c5f-20c9-4694-a5a0-1d39475b6c6c",
+        "chatSessionId": "sess_41e2da96-2b2e-4312-b4e7-b4bfe046c6d5",
+        "timestamp": 1794018846521
+      }
+    ]
+  }
+}
