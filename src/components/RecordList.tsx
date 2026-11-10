@@ -2,7 +2,6 @@ import { ActivityIndicator, FlatList, Pressable, StyleSheet, View } from 'react-
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../theme';
 import type { AgeRow } from '../db/ageRecordRepo';
-import { Checkbox } from './Checkbox';
 import { Text } from './Typography';
 
 type Props = {
@@ -38,13 +37,6 @@ export function RecordList({ records, isLoading, onToggleUsed }: Props) {
           <Text type="secondary" style={styles.index}>
             {index + 1}
           </Text>
-          <View
-            pointerEvents="none"
-            accessibilityElementsHidden
-            importantForAccessibility="no-hide-descendants"
-          >
-            <Checkbox checked={item.used} />
-          </View>
           <Text type={item.used ? 'secondary' : 'default'} delete={item.used} style={styles.date}>
             {item.birthDate}
           </Text>

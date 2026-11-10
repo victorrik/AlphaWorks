@@ -10,6 +10,8 @@ export class CurpRecord extends Model {
   @field('age') age: number;
   @text('state_code') stateCode: string;
   @text('curp') curp: string;
+  @field('height') height: number | null;
+  @field('weight') weight: number | null;
   @field('used') used: boolean;
   @date('created_at') createdAt: Date;
   @writer async setUsed(used: boolean) {

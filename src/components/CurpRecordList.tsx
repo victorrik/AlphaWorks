@@ -2,7 +2,6 @@ import { ActivityIndicator, FlatList, Pressable, StyleSheet, View } from 'react-
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../theme';
 import type { CurpRow } from '../db/curpRecordRepo';
-import { Checkbox } from './Checkbox';
 import { Text } from './Typography';
 
 type Props = {
@@ -12,14 +11,14 @@ type Props = {
 };
 
 export function CurpRecordList({ records, isLoading, onToggleUsed }: Props) {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['curp', 'common']);
   if (isLoading) {
     return <ActivityIndicator style={styles.empty} />;
   }
   if (records.length === 0) {
     return (
       <View style={styles.empty}>
-        <Text type="secondary">{t('empty')}</Text>
+        <Text type="secondary">{t('common:empty')}</Text>
       </View>
     );
   }
@@ -40,27 +39,25 @@ export function CurpRecordList({ records, isLoading, onToggleUsed }: Props) {
             <Text type="secondary" style={styles.index}>
               {index + 1}
             </Text>
-            <View
-              pointerEvents="none"
-              accessibilityElementsHidden
-              importantForAccessibility="no-hide-descendants"
-            >
-              <Checkbox checked={item.used} />
-            </View>
             <View style={styles.info}>
               <Text type={type} delete={item.used}>
                 {`${item.nombres} ${item.apellidoPaterno} ${item.apellidoMaterno}`}
               </Text>
               <Text type={type} delete={item.used}>
+                {`${t('age')}: ${item.age}`}
+              </Text>
+              <Text type={type} delete={item.used}>
+                {`${t('gender')}: ${t(item.sexo === 'H' ? 'male' : 'female')}`}
+              </Text>
+              {item.height != null && item.weight != null && (
+                <Text type={type} delete={item.used}>
+                  {`${t('height')}: ${item.height}  ${t('weight')}: ${item.weight}`}
+                </Text>
+              )}
+              <Text type={type} delete={item.used}>
                 {item.curp}
               </Text>
             </View>
-            <Text type={type} delete={item.used} style={styles.meta}>
-              {item.stateCode}
-            </Text>
-            <Text type={type} delete={item.used} style={styles.meta}>
-              {item.age}
-            </Text>
           </Pressable>
         );
       }}
@@ -72,7 +69,7 @@ const styles = StyleSheet.create({
   empty: { padding: spacing.lg, alignItems: 'center' },
   row: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -80,6 +77,5 @@ const styles = StyleSheet.create({
   },
   rowUsed: { backgroundColor: colors.bgSelected },
   index: { minWidth: 28 },
-  info: { marginLeft: spacing.sm, flex: 1 },
-  meta: { marginLeft: spacing.sm },
+  info: { flex: 1 },
 });

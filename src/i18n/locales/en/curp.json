@@ -1,1 +1,9 @@
-{ "title": "CURP generator" }
+{
+  "title": "CURP generator",
+  "age": "Age",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "height": "H",
+  "weight": "Kg"
+}

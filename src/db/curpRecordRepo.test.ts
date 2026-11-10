@@ -11,6 +11,8 @@ const person = (curp: string, nombres = 'GLORIA'): Person => ({
   birthDate: '27-04-1956',
   age: 69,
   stateCode: 'VZ',
+  height: 160,
+  weight: 60.5,
   curp,
 });
 
@@ -35,6 +37,13 @@ test('repetir el lote inserta 0', async () => {
   expect(await addRecords(batch)).toBe(2);
   expect(await addRecords(batch)).toBe(0);
   expect(await all()).toHaveLength(2);
+});
+
+test('fetchAll devuelve talla y peso guardados', async () => {
+  await addRecords([person('HEGG560427MVZRRL04')]);
+  const [row] = await fetchAll();
+  expect(row.height).toBe(160);
+  expect(row.weight).toBe(60.5);
 });
 
 test('setUsed guarda used en la base', async () => {

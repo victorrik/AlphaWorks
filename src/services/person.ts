@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker/locale/es_MX'; // solo el locale es_MX
 import { formatDate, randomBirthDate, validateRange } from './age';
+import { randomBody } from './anthropometry';
 import { buildCurp, STATE_CODES, type Sexo } from './curp';
 
 export type Rng = () => number;
@@ -12,6 +13,8 @@ export type Person = {
   birthDate: string; // dd-mm-aaaa
   age: number;
   stateCode: string;
+  height: number; // cm
+  weight: number; // kg
   curp: string;
 };
 
@@ -41,13 +44,14 @@ export function generatePeople(
   for (let i = 0; i < count; i++) {
     const sexo: Sexo = rng() < 0.5 ? 'H' : 'M';
     const r = rng();
-    const nombres = givenNames(r < 0.8 ? 1 : r < 0.95 ? 2 : 3, sexo);
+    const nombres = givenNames(r < 0.9 ? 1 : 2, sexo);
     // Apellidos tal cual (pueden ser compuestos); buildCurp usa la primera palabra útil.
     const apellidoPaterno = faker.person.lastName();
     const apellidoMaterno = faker.person.lastName();
     const stateCode = rng() < 0.8 ? 'GR' : OTHER_STATES[Math.floor(rng() * OTHER_STATES.length)];
     const age = min + Math.floor(rng() * (max - min + 1));
     const birth = randomBirthDate(age, now);
+    const { height, weight } = randomBody(sexo, age, rng);
     const diferenciador =
       birth.getFullYear() < 2000
         ? String(Math.floor(rng() * 10))
@@ -61,6 +65,8 @@ export function generatePeople(
       birthDate: formatDate(birth),
       age,
       stateCode,
+      height,
+      weight,
       curp: buildCurp({
         nombres,
         apellidoPaterno,

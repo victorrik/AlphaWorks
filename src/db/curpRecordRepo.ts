@@ -12,8 +12,10 @@ export type CurpRow = {
   apellidoPaterno: string;
   apellidoMaterno: string;
   curp: string;
-  stateCode: string;
+  sexo: string;
   age: number;
+  height: number | null; // cm; null en registros anteriores
+  weight: number | null; // kg
   used: boolean;
 };
 
@@ -26,8 +28,10 @@ export async function fetchAll(): Promise<CurpRow[]> {
     apellidoPaterno: r.apellidoPaterno,
     apellidoMaterno: r.apellidoMaterno,
     curp: r.curp,
-    stateCode: r.stateCode,
+    sexo: r.sexo,
     age: r.age,
+    height: r.height,
+    weight: r.weight,
     used: r.used,
   }));
 }
@@ -69,6 +73,8 @@ export async function addRecords(people: Person[]): Promise<number> {
           record.birthDate = p.birthDate;
           record.age = p.age;
           record.stateCode = p.stateCode;
+          record.height = p.height;
+          record.weight = p.weight;
           record.curp = p.curp;
           record.used = false;
           record.createdAt = new Date();

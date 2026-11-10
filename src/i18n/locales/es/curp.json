@@ -1,1 +1,9 @@
-{ "title": "Generador de CURP" }
+{
+  "title": "Generador de CURP",
+  "age": "Edad",
+  "gender": "Género",
+  "male": "Masculino",
+  "female": "Femenino",
+  "height": "T",
+  "weight": "Kg"
+}

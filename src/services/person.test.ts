@@ -76,7 +76,7 @@ describe('Property 3: Diferenciador según siglo', () => {
 });
 describe('Property 5: Distribuciones de estado y número de nombres', () => {
   // **Validates: Requirements 2.2, 3.1, 3.2**
-  it('5000 muestras: GR ≈ 0.80; 1/2/3 nombres ≈ 0.80/0.15/0.05; resto ∈ otras 31 claves', () => {
+  it('5000 muestras: GR ≈ 0.80; 1/2 nombres ≈ 0.90/0.10; resto ∈ otras 31 claves', () => {
     const N = 5000;
     const people = generatePeople(18, 60, N, NOW);
     expect(people).toHaveLength(N);
@@ -92,15 +92,15 @@ describe('Property 5: Distribuciones de estado y número de nombres', () => {
     expect(gr).toBeLessThanOrEqual(0.83);
 
     const bounds: Array<[number, number, number]> = [
-      [1, 0.77, 0.83],
-      [2, 0.12, 0.18],
-      [3, 0.03, 0.07],
+      [1, 0.87, 0.93],
+      [2, 0.07, 0.13],
     ];
     for (const [n, lo, hi] of bounds) {
       const s = share(p => p.nombres.split(' ').length === n);
       expect(s).toBeGreaterThanOrEqual(lo);
       expect(s).toBeLessThanOrEqual(hi);
     }
+    expect(people.every(p => p.nombres.split(' ').length <= 2)).toBe(true);
   });
 });
 
@@ -131,6 +131,18 @@ describe('Property 6: Entradas inválidas lanzan', () => {
     for (let i = 0; i < 100; i++) {
       const [min, max, count, msg] = cases[i % cases.length]();
       expect(() => generatePeople(min, max, count, NOW)).toThrow(msg);
+    }
+  });
+});
+
+describe('Talla y peso', () => {
+  it('cada persona trae talla (cm entera) y peso (kg) plausibles para su edad y sexo', () => {
+    for (const p of generatePeople(0, 90, 1000, NOW)) {
+      expect(Number.isInteger(p.height)).toBe(true);
+      expect(p.height).toBeGreaterThan(p.age === 0 ? 50 : 70);
+      expect(p.height).toBeLessThan(200);
+      expect(p.weight).toBeGreaterThan(3);
+      expect(p.weight).toBeLessThan(150);
     }
   });
 });
