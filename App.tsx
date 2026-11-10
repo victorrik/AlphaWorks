@@ -4,6 +4,7 @@
  * @format
  */
 
+import './src/i18n';
 import { PortalProvider } from '@gorhom/portal';
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

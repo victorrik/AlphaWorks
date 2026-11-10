@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { withObservables } from '@nozbe/watermelondb/react';
+import { useTranslation } from 'react-i18next';
 import { Button, Input, RecordList, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
-import { generateByRange } from '../services/age';
+import { generateByRange, ValidationError } from '../services/age';
 import { addRecords, observeBySource, toggleUsed } from '../db/ageRecordRepo';
 import type { AgeRecord } from '../db/models/AgeRecord';
 
 type Props = { records: AgeRecord[] };
 
 function RangeGeneratorView({ records }: Props) {
+  const { t } = useTranslation(['range', 'common']);
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const [count, setCount] = useState('');
@@ -26,38 +28,38 @@ function RangeGeneratorView({ records }: Props) {
       setError(null);
       await addRecords('range', generated);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Error al generar.');
+      setError(e instanceof ValidationError ? t(`common:${e.key}`) : t('common:errors.generic'));
     }
   };
 
   return (
     <View style={styles.screen}>
-      <Title level={3}>Generador por rango</Title>
+      <Title level={3}>{t('title')}</Title>
       <View style={styles.form}>
         <Input
           value={min}
           onChangeText={setMin}
-          placeholder="Edad mínima"
+          placeholder={t('common:minAge')}
           keyboardType="numeric"
           status={error ? 'error' : undefined}
         />
         <Input
           value={max}
           onChangeText={setMax}
-          placeholder="Edad máxima"
+          placeholder={t('common:maxAge')}
           keyboardType="numeric"
           status={error ? 'error' : undefined}
         />
         <Input
           value={count}
           onChangeText={setCount}
-          placeholder="Cantidad"
+          placeholder={t('common:count')}
           keyboardType="numeric"
           status={error ? 'error' : undefined}
         />
         {error != null && <Text type="danger">{error}</Text>}
         <Button type="primary" block onPress={onGenerate}>
-          Generar
+          {t('common:generate')}
         </Button>
       </View>
       <RecordList records={records} onToggleUsed={toggleUsed} />

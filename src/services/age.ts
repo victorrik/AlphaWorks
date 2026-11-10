@@ -1,5 +1,20 @@
 export type GeneratedRecord = { birthDate: string; age: number };
 
+// Clave del namespace 'common' de i18n; la UI la traduce, la lógica no conoce idiomas.
+export type ValidationKey =
+  | 'errors.integers'
+  | 'errors.minNegative'
+  | 'errors.maxLessThanMin'
+  | 'errors.countMin'
+  | 'errors.agesEmpty'
+  | 'errors.agesInvalid';
+
+export class ValidationError extends Error {
+  constructor(public key: ValidationKey) {
+    super(key);
+  }
+}
+
 function isInt(n: number): boolean {
   return Number.isInteger(n);
 }
@@ -50,16 +65,16 @@ export function formatDate(d: Date): string {
 // Reglas de rango compartidas por generateByRange y el generador de CURP.
 export function validateRange(min: number, max: number, count: number): void {
   if (!isInt(min) || !isInt(max) || !isInt(count)) {
-    throw new Error('Mínimo, máximo y cantidad deben ser enteros.');
+    throw new ValidationError('errors.integers');
   }
   if (min < 0) {
-    throw new Error('La edad mínima debe ser mayor o igual a 0.');
+    throw new ValidationError('errors.minNegative');
   }
   if (max < min) {
-    throw new Error('La edad máxima debe ser mayor o igual a la mínima.');
+    throw new ValidationError('errors.maxLessThanMin');
   }
   if (count < 1) {
-    throw new Error('La cantidad debe ser un entero mayor o igual a 1.');
+    throw new ValidationError('errors.countMin');
   }
 }
 
@@ -84,11 +99,11 @@ export function generateByRange(
 // Req 2: un registro por edad de la lista.
 export function generateByAges(ages: number[], now: Date): GeneratedRecord[] {
   if (ages.length === 0) {
-    throw new Error('La lista de edades no puede estar vacía.');
+    throw new ValidationError('errors.agesEmpty');
   }
   for (const age of ages) {
     if (!isInt(age) || age < 0) {
-      throw new Error('Cada edad debe ser un entero mayor o igual a 0.');
+      throw new ValidationError('errors.agesInvalid');
     }
   }
   return ages.map(age => ({ birthDate: formatDate(randomBirthDate(age, now)), age }));

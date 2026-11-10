@@ -1,0 +1,16 @@
+{
+  "generate": "Generar",
+  "empty": "Sin registros todavía",
+  "minAge": "Edad mínima",
+  "maxAge": "Edad máxima",
+  "count": "Cantidad",
+  "errors": {
+    "generic": "Error al generar.",
+    "integers": "Mínimo, máximo y cantidad deben ser enteros.",
+    "minNegative": "La edad mínima debe ser mayor o igual a 0.",
+    "maxLessThanMin": "La edad máxima debe ser mayor o igual a la mínima.",
+    "countMin": "La cantidad debe ser un entero mayor o igual a 1.",
+    "agesEmpty": "La lista de edades no puede estar vacía.",
+    "agesInvalid": "Cada edad debe ser un entero mayor o igual a 0."
+  }
+}

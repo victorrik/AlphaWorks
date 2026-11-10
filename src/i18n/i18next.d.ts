@@ -1,0 +1,10 @@
+import 'i18next';
+import type { resources } from './index';
+
+// Claves tipadas: TypeScript marca las que no existan en es.
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    defaultNS: 'common';
+    resources: (typeof resources)['es'];
+  }
+}

@@ -1,11 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Button, Text, Title } from '../components';
 import type { RootStackParamList } from '../navigation/RootNavigator';
 import { colors, spacing } from '../theme';
 
 export function HomeScreen() {
+  const { t } = useTranslation(['home', 'range', 'calculator', 'curp']);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -13,28 +15,28 @@ export function HomeScreen() {
     <View style={styles.screen}>
       <View style={styles.header}>
         <Title level={3}>AlphaWorks</Title>
-        <Text type="secondary">Elige una herramienta.</Text>
+        <Text type="secondary">{t('subtitle')}</Text>
       </View>
       <Button
         type="primary"
         block
         onPress={() => navigation.navigate('RangeGenerator')}
       >
-        Generador por rango
+        {t('range:title')}
       </Button>
       <Button
         type="primary"
         block
         onPress={() => navigation.navigate('AgeCalculator')}
       >
-        Calculador por edades
+        {t('calculator:title')}
       </Button>
       <Button
         type="primary"
         block
         onPress={() => navigation.navigate('CurpGenerator')}
       >
-        Generador de CURP
+        {t('curp:title')}
       </Button>
     </View>
   );

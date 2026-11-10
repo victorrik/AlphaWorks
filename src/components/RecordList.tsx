@@ -1,4 +1,5 @@
 import { FlatList, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../theme';
 import type { AgeRecord } from '../db/models/AgeRecord';
 import { Checkbox } from './Checkbox';
@@ -10,10 +11,11 @@ type Props = {
 };
 
 export function RecordList({ records, onToggleUsed }: Props) {
+  const { t } = useTranslation();
   if (records.length === 0) {
     return (
       <View style={styles.empty}>
-        <Text type="secondary">Sin registros todavía</Text>
+        <Text type="secondary">{t('empty')}</Text>
       </View>
     );
   }

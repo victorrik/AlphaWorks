@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { AgeCalculatorScreen } from '../screens/AgeCalculatorScreen';
 import { CurpGeneratorScreen } from '../screens/CurpGeneratorScreen';
 import { HomeScreen } from '../screens/HomeScreen';
@@ -15,6 +16,7 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
+  const { t } = useTranslation(['range', 'calculator', 'curp']);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -22,17 +24,17 @@ export function RootNavigator() {
         <Stack.Screen
           name="RangeGenerator"
           component={RangeGeneratorScreen}
-          options={{ title: 'Generador por rango' }}
+          options={{ title: t('range:title') }}
         />
         <Stack.Screen
           name="AgeCalculator"
           component={AgeCalculatorScreen}
-          options={{ title: 'Calculador por edades' }}
+          options={{ title: t('calculator:title') }}
         />
         <Stack.Screen
           name="CurpGenerator"
           component={CurpGeneratorScreen}
-          options={{ title: 'Generador de CURP' }}
+          options={{ title: t('curp:title') }}
         />
       </Stack.Navigator>
     </NavigationContainer>

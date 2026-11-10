@@ -1,0 +1,16 @@
+{
+  "generate": "Generate",
+  "empty": "No records yet",
+  "minAge": "Minimum age",
+  "maxAge": "Maximum age",
+  "count": "Quantity",
+  "errors": {
+    "generic": "Failed to generate.",
+    "integers": "Minimum, maximum and quantity must be integers.",
+    "minNegative": "The minimum age must be greater than or equal to 0.",
+    "maxLessThanMin": "The maximum age must be greater than or equal to the minimum.",
+    "countMin": "The quantity must be an integer greater than or equal to 1.",
+    "agesEmpty": "The list of ages cannot be empty.",
+    "agesInvalid": "Each age must be an integer greater than or equal to 0."
+  }
+}

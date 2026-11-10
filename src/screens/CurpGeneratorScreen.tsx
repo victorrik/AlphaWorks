@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { withObservables } from '@nozbe/watermelondb/react';
+import { useTranslation } from 'react-i18next';
 import { Button, CurpRecordList, Input, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
+import { ValidationError } from '../services/age';
 import { generatePeople } from '../services/person';
 import { addRecords, observeAll, toggleUsed } from '../db/curpRecordRepo';
 import type { CurpRecord } from '../db/models/CurpRecord';
@@ -10,6 +12,7 @@ import type { CurpRecord } from '../db/models/CurpRecord';
 type Props = { records: CurpRecord[] };
 
 function CurpGeneratorView({ records }: Props) {
+  const { t } = useTranslation(['curp', 'common']);
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const [count, setCount] = useState('');
@@ -26,38 +29,38 @@ function CurpGeneratorView({ records }: Props) {
       setError(null);
       await addRecords(people);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Error al generar.');
+      setError(e instanceof ValidationError ? t(`common:${e.key}`) : t('common:errors.generic'));
     }
   };
 
   return (
     <View style={styles.screen}>
-      <Title level={3}>Generador de CURP</Title>
+      <Title level={3}>{t('title')}</Title>
       <View style={styles.form}>
         <Input
           value={min}
           onChangeText={setMin}
-          placeholder="Edad mínima"
+          placeholder={t('common:minAge')}
           keyboardType="numeric"
           status={error ? 'error' : undefined}
         />
         <Input
           value={max}
           onChangeText={setMax}
-          placeholder="Edad máxima"
+          placeholder={t('common:maxAge')}
           keyboardType="numeric"
           status={error ? 'error' : undefined}
         />
         <Input
           value={count}
           onChangeText={setCount}
-          placeholder="Cantidad"
+          placeholder={t('common:count')}
           keyboardType="numeric"
           status={error ? 'error' : undefined}
         />
         {error != null && <Text type="danger">{error}</Text>}
         <Button type="primary" block onPress={onGenerate}>
-          Generar
+          {t('common:generate')}
         </Button>
       </View>
       <CurpRecordList records={records} onToggleUsed={toggleUsed} />

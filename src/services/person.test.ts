@@ -106,26 +106,26 @@ describe('Property 5: Distribuciones de estado y número de nombres', () => {
 
 describe('Property 6: Entradas inválidas lanzan', () => {
   // **Validates: Requirements 1.4, 1.5, 1.6, 1.7**
-  it('no enteros, min < 0, max < min o count < 1 lanzan con el mensaje de validateRange', () => {
+  it('no enteros, min < 0, max < min o count < 1 lanzan con la clave de validateRange', () => {
     const frac = () => randInt(0, 100) + 0.1 + Math.random() * 0.8; // nunca entero
     const cases: Array<() => [number, number, number, string]> = [
       () => {
         // Un solo campo no entero; los demás válidos.
         const args = [randInt(0, 50), randInt(50, 120), randInt(1, 20)];
         args[randInt(0, 2)] = frac();
-        return [args[0], args[1], args[2], 'Mínimo, máximo y cantidad deben ser enteros.'];
+        return [args[0], args[1], args[2], 'errors.integers'];
       },
       () => {
         const min = -randInt(1, 100);
-        return [min, randInt(min, 120), randInt(1, 20), 'La edad mínima debe ser mayor o igual a 0.'];
+        return [min, randInt(min, 120), randInt(1, 20), 'errors.minNegative'];
       },
       () => {
         const min = randInt(1, 120);
-        return [min, randInt(0, min - 1), randInt(1, 20), 'La edad máxima debe ser mayor o igual a la mínima.'];
+        return [min, randInt(0, min - 1), randInt(1, 20), 'errors.maxLessThanMin'];
       },
       () => {
         const min = randInt(0, 100);
-        return [min, randInt(min, 120), -randInt(0, 100), 'La cantidad debe ser un entero mayor o igual a 1.'];
+        return [min, randInt(min, 120), -randInt(0, 100), 'errors.countMin'];
       },
     ];
     for (let i = 0; i < 100; i++) {

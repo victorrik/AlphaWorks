@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { withObservables } from '@nozbe/watermelondb/react';
+import { useTranslation } from 'react-i18next';
 import { Button, Input, RecordList, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
-import { generateByAges } from '../services/age';
+import { generateByAges, ValidationError } from '../services/age';
 import { addRecords, observeBySource, toggleUsed } from '../db/ageRecordRepo';
 import type { AgeRecord } from '../db/models/AgeRecord';
 
 type Props = { records: AgeRecord[] };
 
 function AgeCalculatorView({ records }: Props) {
+  const { t } = useTranslation(['calculator', 'common']);
   const [ages, setAges] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -20,24 +22,24 @@ function AgeCalculatorView({ records }: Props) {
       setError(null);
       await addRecords('calculator', generated);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Error al generar.');
+      setError(e instanceof ValidationError ? t(`common:${e.key}`) : t('common:errors.generic'));
     }
   };
 
   return (
     <View style={styles.screen}>
-      <Title level={3}>Calculador por edades</Title>
+      <Title level={3}>{t('title')}</Title>
       <View style={styles.form}>
         <Input
           value={ages}
           onChangeText={setAges}
-          placeholder="Edades separadas por coma"
+          placeholder={t('agesPlaceholder')}
           keyboardType="numeric"
           status={error ? 'error' : undefined}
         />
         {error != null && <Text type="danger">{error}</Text>}
         <Button type="primary" block onPress={onGenerate}>
-          Generar
+          {t('common:generate')}
         </Button>
       </View>
       <RecordList records={records} onToggleUsed={toggleUsed} />
