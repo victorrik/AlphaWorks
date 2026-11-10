@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../theme';
 import type { CurpRecord } from '../db/models/CurpRecord';
@@ -24,11 +24,25 @@ export function CurpRecordList({ records, onToggleUsed }: Props) {
     <FlatList
       data={records}
       keyExtractor={item => item.id}
-      renderItem={({ item }) => {
+      renderItem={({ item, index }) => {
         const type = item.used ? 'secondary' : 'default';
         return (
-          <View style={[styles.row, item.used && styles.rowUsed]}>
-            <Checkbox checked={item.used} onChange={() => onToggleUsed(item)} />
+          <Pressable
+            accessibilityRole="checkbox"
+            accessibilityState={{ checked: item.used }}
+            onPress={() => onToggleUsed(item)}
+            style={[styles.row, item.used && styles.rowUsed]}
+          >
+            <Text type="secondary" style={styles.index}>
+              {index + 1}
+            </Text>
+            <View
+              pointerEvents="none"
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants"
+            >
+              <Checkbox checked={item.used} />
+            </View>
             <View style={styles.info}>
               <Text type={type} delete={item.used}>
                 {`${item.nombres} ${item.apellidoPaterno} ${item.apellidoMaterno}`}
@@ -43,7 +57,7 @@ export function CurpRecordList({ records, onToggleUsed }: Props) {
             <Text type={type} delete={item.used} style={styles.meta}>
               {item.age}
             </Text>
-          </View>
+          </Pressable>
         );
       }}
     />
@@ -60,7 +74,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.border,
   },
-  rowUsed: { opacity: 0.5 },
+  rowUsed: { backgroundColor: colors.bgSelected },
+  index: { minWidth: 28 },
   info: { marginLeft: spacing.sm, flex: 1 },
   meta: { marginLeft: spacing.sm },
 });

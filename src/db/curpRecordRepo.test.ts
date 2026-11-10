@@ -1,6 +1,6 @@
 import { database } from './index';
 import { CurpRecord } from './models/CurpRecord';
-import { addRecords, toggleUsed } from './curpRecordRepo';
+import { addRecords, observeAll, toggleUsed } from './curpRecordRepo';
 import { Person } from '../services/person';
 
 const person = (curp: string, nombres = 'GLORIA'): Person => ({
@@ -45,4 +45,15 @@ test('toggleUsed alterna used', async () => {
   expect(rec.used).toBe(true);
   await toggleUsed(rec);
   expect(rec.used).toBe(false);
+});
+
+test('observeAll vuelve a emitir al marcar un registro', async () => {
+  await addRecords([person('HEGG560427MVZRRL04')]);
+  const emissions: boolean[][] = [];
+  const sub = observeAll().subscribe(rs => emissions.push(rs.map(r => r.used)));
+  const [rec] = await all();
+  await toggleUsed(rec);
+  sub.unsubscribe();
+  expect(emissions[emissions.length - 1]).toEqual([true]);
+  expect(emissions.length).toBeGreaterThan(1);
 });

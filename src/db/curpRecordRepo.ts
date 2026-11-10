@@ -6,9 +6,10 @@ import { Person } from '../services/person';
 
 const records = database.get<CurpRecord>('curp_records');
 
-// Orden desc por created_at (Req 6.1).
+// Orden desc por created_at (Req 6.1). Con `used` en las columnas observadas,
+// marcar un registro vuelve a emitir y la lista se actualiza.
 export function observeAll(): Observable<CurpRecord[]> {
-  return records.query(Q.sortBy('created_at', Q.desc)).observe();
+  return records.query(Q.sortBy('created_at', Q.desc)).observeWithColumns(['used']);
 }
 
 // Dedup por CURP dentro del lote (se queda la primera) y contra las ya

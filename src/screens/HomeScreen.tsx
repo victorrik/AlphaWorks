@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: spacing.lg,
     gap: spacing.md,
-    backgroundColor: colors.bgLayout,
+    backgroundColor: colors.white,
   },
   header: { gap: spacing.xxs, marginBottom: spacing.md },
 });

@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../theme';
 import type { AgeRecord } from '../db/models/AgeRecord';
@@ -24,16 +24,30 @@ export function RecordList({ records, onToggleUsed }: Props) {
     <FlatList
       data={records}
       keyExtractor={item => item.id}
-      renderItem={({ item }) => (
-        <View style={[styles.row, item.used && styles.rowUsed]}>
-          <Checkbox checked={item.used} onChange={() => onToggleUsed(item)} />
+      renderItem={({ item, index }) => (
+        <Pressable
+          accessibilityRole="checkbox"
+          accessibilityState={{ checked: item.used }}
+          onPress={() => onToggleUsed(item)}
+          style={[styles.row, item.used && styles.rowUsed]}
+        >
+          <Text type="secondary" style={styles.index}>
+            {index + 1}
+          </Text>
+          <View
+            pointerEvents="none"
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants"
+          >
+            <Checkbox checked={item.used} />
+          </View>
           <Text type={item.used ? 'secondary' : 'default'} delete={item.used} style={styles.date}>
             {item.birthDate}
           </Text>
           <Text type={item.used ? 'secondary' : 'default'} delete={item.used}>
             {item.age}
           </Text>
-        </View>
+        </Pressable>
       )}
     />
   );
@@ -49,6 +63,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.border,
   },
-  rowUsed: { opacity: 0.5 },
+  rowUsed: { backgroundColor: colors.bgSelected },
+  index: { minWidth: 28 },
   date: { marginLeft: spacing.sm, flex: 1 },
 });

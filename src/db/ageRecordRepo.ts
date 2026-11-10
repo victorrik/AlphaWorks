@@ -12,7 +12,7 @@ const records = database.get<AgeRecord>('age_records');
 export function observeBySource(source: Source): Observable<AgeRecord[]> {
   return records
     .query(Q.where('source', source), Q.sortBy('created_at', Q.desc))
-    .observe();
+    .observeWithColumns(['used']);
 }
 
 const dedupKey = (birthDate: string, age: number) => `${birthDate}|${age}`;

@@ -33,6 +33,7 @@ export const colors = {
   bgContainer: '#ffffff',
   bgContainerDisabled: 'rgba(0, 0, 0, 0.04)',
   bgLayout: '#f5f5f5',
+  bgSelected: '#d9d9d9', // fila marcada
   bgElevated: '#ffffff',
   bgMask: 'rgba(0, 0, 0, 0.45)',
 

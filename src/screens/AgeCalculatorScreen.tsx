@@ -52,6 +52,6 @@ export const AgeCalculatorScreen = withObservables([], () => ({
 }))(AgeCalculatorView);
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, padding: spacing.lg, backgroundColor: colors.bgLayout },
+  screen: { flex: 1, padding: spacing.lg, backgroundColor: colors.white },
   form: { gap: spacing.sm, marginVertical: spacing.lg },
 });
