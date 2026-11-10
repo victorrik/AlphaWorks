@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Button, Input, RecordList, Text, Title } from '../components';
+import { Button, Checkbox, Input, RecordList, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
 import { generateByAges, ValidationError } from '../services/age';
 import { addRecords, fetchBySource, setUsed } from '../db/ageRecordRepo';
@@ -11,7 +11,8 @@ const query = { fetch: () => fetchBySource('calculator'), setUsed };
 
 export function AgeCalculatorScreen() {
   const { t } = useTranslation(['calculator', 'common']);
-  const { data, isLoading, refetch, toggleUsed } = useRecords(query);
+  const { data, isLoading, refetch, toggleUsed, hideUsed, setHideUsed } =
+    useRecords(query);
   const [ages, setAges] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -42,6 +43,9 @@ export function AgeCalculatorScreen() {
         <Button type="primary" block onPress={onGenerate}>
           {t('common:generate')}
         </Button>
+        <Checkbox checked={hideUsed} onChange={setHideUsed}>
+          {t('common:hideMarked')}
+        </Checkbox>
       </View>
       <RecordList
         records={data}

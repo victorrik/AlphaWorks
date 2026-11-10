@@ -12,5 +12,6 @@
     "countMin": "La cantidad debe ser un entero mayor o igual a 1.",
     "agesEmpty": "La lista de edades no puede estar vacía.",
     "agesInvalid": "Cada edad debe ser un entero mayor o igual a 0."
-  }
+  },
+  "hideMarked": "Ocultar marcados"
 }

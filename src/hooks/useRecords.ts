@@ -10,14 +10,15 @@ export type RecordsQuery<T extends Row> = {
 };
 
 export function useRecords<T extends Row>(query: RecordsQuery<T>) {
-  const [data, setData] = useState<T[]>([]);
+  const [rows, setRows] = useState<T[]>([]);
+  const [hideUsed, setHideUsed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
     query
       .fetch()
-      .then(rows => active && setData(rows))
+      .then(fetched => active && setRows(fetched))
       // shortcut: si la consulta falla se muestra la lista vacía, sin mensaje de error.
       .catch(() => {})
       .finally(() => active && setIsLoading(false));
@@ -27,14 +28,17 @@ export function useRecords<T extends Row>(query: RecordsQuery<T>) {
   }, [query]);
 
   // Vuelve a consultar la base (después de insertar registros).
-  const refetch = useCallback(async () => setData(await query.fetch()), [query]);
+  const refetch = useCallback(
+    async () => setRows(await query.fetch()),
+    [query],
+  );
 
   const markLocal = (id: string, used: boolean) =>
-    setData(rows => rows.map(r => (r.id === id ? { ...r, used } : r)));
+    setRows(prev => prev.map(r => (r.id === id ? { ...r, used } : r)));
 
   // Actualiza primero el estado local y luego la base; si la base falla, revierte.
   const toggleUsed = async (id: string) => {
-    const row = data.find(r => r.id === id);
+    const row = rows.find(r => r.id === id);
     if (!row) {
       return;
     }
@@ -47,5 +51,8 @@ export function useRecords<T extends Row>(query: RecordsQuery<T>) {
     }
   };
 
-  return { data, isLoading, refetch, toggleUsed };
+  // Los marcados se pueden ocultar; el estado completo sigue en `rows`.
+  const data = hideUsed ? rows.filter(r => !r.used) : rows;
+
+  return { data, isLoading, refetch, toggleUsed, hideUsed, setHideUsed };
 }

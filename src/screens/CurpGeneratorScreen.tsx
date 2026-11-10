@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Button, CurpRecordList, Input, Text, Title } from '../components';
+import { Button, Checkbox, CurpRecordList, Input, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
 import { ValidationError } from '../services/age';
 import { generatePeople } from '../services/person';
@@ -12,7 +12,8 @@ const query = { fetch: () => fetchAll(), setUsed };
 
 export function CurpGeneratorScreen() {
   const { t } = useTranslation(['curp', 'common']);
-  const { data, isLoading, refetch, toggleUsed } = useRecords(query);
+  const { data, isLoading, refetch, toggleUsed, hideUsed, setHideUsed } =
+    useRecords(query);
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const [count, setCount] = useState('');
@@ -72,6 +73,9 @@ export function CurpGeneratorScreen() {
         <Button type="primary" block onPress={onGenerate}>
           {t('common:generate')}
         </Button>
+        <Checkbox checked={hideUsed} onChange={setHideUsed}>
+          {t('common:hideMarked')}
+        </Checkbox>
       </View>
       <CurpRecordList
         records={data}

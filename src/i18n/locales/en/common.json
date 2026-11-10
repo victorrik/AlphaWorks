@@ -12,5 +12,6 @@
     "countMin": "The quantity must be an integer greater than or equal to 1.",
     "agesEmpty": "The list of ages cannot be empty.",
     "agesInvalid": "Each age must be an integer greater than or equal to 0."
-  }
+  },
+  "hideMarked": "Hide marked"
 }

@@ -1,1 +1,7 @@
-{ "subtitle": "Choose a tool." }
+{
+  "subtitle": "Choose a tool.",
+  "deleteRecords": "Delete records",
+  "deleteTitle": "Delete all records?",
+  "deleteMessage": "The records of all tools will be deleted. This cannot be undone.",
+  "cancel": "Cancel"
+}

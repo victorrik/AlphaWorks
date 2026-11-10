@@ -1,1 +1,7 @@
-{ "subtitle": "Elige una herramienta." }
+{
+  "subtitle": "Elige una herramienta.",
+  "deleteRecords": "Eliminar registros",
+  "deleteTitle": "¿Eliminar todos los registros?",
+  "deleteMessage": "Se borrarán los registros de todas las herramientas. Esta acción no se puede deshacer.",
+  "cancel": "Cancelar"
+}

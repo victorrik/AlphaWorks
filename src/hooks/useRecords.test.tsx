@@ -42,3 +42,12 @@ test('si la base falla, revierte el estado local', async () => {
   await ReactTestRenderer.act(() => hook.toggleUsed('a'));
   expect(hook.data.find(r => r.id === 'a')?.used).toBe(false);
 });
+
+test('hideUsed oculta los marcados sin perderlos', async () => {
+  await mount(makeQuery(jest.fn().mockResolvedValue(undefined)));
+  await ReactTestRenderer.act(() => hook.toggleUsed('a'));
+  await ReactTestRenderer.act(async () => hook.setHideUsed(true));
+  expect(hook.data.map(r => r.id)).toEqual(['b']);
+  await ReactTestRenderer.act(async () => hook.setHideUsed(false));
+  expect(hook.data.map(r => r.id)).toEqual(['a', 'b']);
+});
