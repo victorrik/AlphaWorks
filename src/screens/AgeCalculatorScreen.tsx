@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { withObservables } from '@nozbe/watermelondb/react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, RecordList, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
 import { generateByAges, ValidationError } from '../services/age';
-import { addRecords, observeBySource, toggleUsed } from '../db/ageRecordRepo';
-import type { AgeRecord } from '../db/models/AgeRecord';
+import { addRecords, fetchBySource, setUsed } from '../db/ageRecordRepo';
+import { useRecords } from '../hooks/useRecords';
 
-type Props = { records: AgeRecord[] };
+const query = { fetch: () => fetchBySource('calculator'), setUsed };
 
-function AgeCalculatorView({ records }: Props) {
+export function AgeCalculatorScreen() {
   const { t } = useTranslation(['calculator', 'common']);
+  const { data, isLoading, refetch, toggleUsed } = useRecords(query);
   const [ages, setAges] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -21,6 +21,7 @@ function AgeCalculatorView({ records }: Props) {
       const generated = generateByAges(parsed, new Date());
       setError(null);
       await addRecords('calculator', generated);
+      await refetch();
     } catch (e) {
       setError(e instanceof ValidationError ? t(`common:${e.key}`) : t('common:errors.generic'));
     }
@@ -42,14 +43,14 @@ function AgeCalculatorView({ records }: Props) {
           {t('common:generate')}
         </Button>
       </View>
-      <RecordList records={records} onToggleUsed={toggleUsed} />
+      <RecordList
+        records={data}
+        isLoading={isLoading}
+        onToggleUsed={toggleUsed}
+      />
     </View>
   );
 }
-
-export const AgeCalculatorScreen = withObservables([], () => ({
-  records: observeBySource('calculator'),
-}))(AgeCalculatorView);
 
 const styles = StyleSheet.create({
   screen: { flex: 1, padding: spacing.lg, backgroundColor: colors.white },

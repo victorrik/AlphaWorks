@@ -1,6 +1,6 @@
 import { database } from './index';
 import { CurpRecord } from './models/CurpRecord';
-import { addRecords, observeAll, toggleUsed } from './curpRecordRepo';
+import { addRecords, fetchAll, setUsed } from './curpRecordRepo';
 import { Person } from '../services/person';
 
 const person = (curp: string, nombres = 'GLORIA'): Person => ({
@@ -37,23 +37,12 @@ test('repetir el lote inserta 0', async () => {
   expect(await all()).toHaveLength(2);
 });
 
-test('toggleUsed alterna used', async () => {
+test('setUsed guarda used en la base', async () => {
   await addRecords([person('HEGG560427MVZRRL04')]);
-  const [rec] = await all();
-  expect(rec.used).toBe(false);
-  await toggleUsed(rec);
-  expect(rec.used).toBe(true);
-  await toggleUsed(rec);
-  expect(rec.used).toBe(false);
-});
-
-test('observeAll vuelve a emitir al marcar un registro', async () => {
-  await addRecords([person('HEGG560427MVZRRL04')]);
-  const emissions: boolean[][] = [];
-  const sub = observeAll().subscribe(rs => emissions.push(rs.map(r => r.used)));
-  const [rec] = await all();
-  await toggleUsed(rec);
-  sub.unsubscribe();
-  expect(emissions[emissions.length - 1]).toEqual([true]);
-  expect(emissions.length).toBeGreaterThan(1);
+  const [row] = await fetchAll();
+  expect(row.used).toBe(false);
+  await setUsed(row.id, true);
+  expect((await fetchAll())[0].used).toBe(true);
+  await setUsed(row.id, false);
+  expect((await fetchAll())[0].used).toBe(false);
 });

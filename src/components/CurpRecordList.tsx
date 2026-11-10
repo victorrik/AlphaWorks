@@ -1,17 +1,21 @@
-import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../theme';
-import type { CurpRecord } from '../db/models/CurpRecord';
+import type { CurpRow } from '../db/curpRecordRepo';
 import { Checkbox } from './Checkbox';
 import { Text } from './Typography';
 
 type Props = {
-  records: CurpRecord[];
-  onToggleUsed: (record: CurpRecord) => void;
+  records: CurpRow[];
+  isLoading: boolean;
+  onToggleUsed: (id: string) => void;
 };
 
-export function CurpRecordList({ records, onToggleUsed }: Props) {
+export function CurpRecordList({ records, isLoading, onToggleUsed }: Props) {
   const { t } = useTranslation();
+  if (isLoading) {
+    return <ActivityIndicator style={styles.empty} />;
+  }
   if (records.length === 0) {
     return (
       <View style={styles.empty}>
@@ -30,7 +34,7 @@ export function CurpRecordList({ records, onToggleUsed }: Props) {
           <Pressable
             accessibilityRole="checkbox"
             accessibilityState={{ checked: item.used }}
-            onPress={() => onToggleUsed(item)}
+            onPress={() => onToggleUsed(item.id)}
             style={[styles.row, item.used && styles.rowUsed]}
           >
             <Text type="secondary" style={styles.index}>

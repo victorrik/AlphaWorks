@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { withObservables } from '@nozbe/watermelondb/react';
 import { useTranslation } from 'react-i18next';
 import { Button, CurpRecordList, Input, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
 import { ValidationError } from '../services/age';
 import { generatePeople } from '../services/person';
-import { addRecords, observeAll, toggleUsed } from '../db/curpRecordRepo';
-import type { CurpRecord } from '../db/models/CurpRecord';
+import { addRecords, fetchAll, setUsed } from '../db/curpRecordRepo';
+import { useRecords } from '../hooks/useRecords';
 
-type Props = { records: CurpRecord[] };
+const query = { fetch: () => fetchAll(), setUsed };
 
-function CurpGeneratorView({ records }: Props) {
+export function CurpGeneratorScreen() {
   const { t } = useTranslation(['curp', 'common']);
+  const { data, isLoading, refetch, toggleUsed } = useRecords(query);
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const [count, setCount] = useState('');
@@ -28,6 +28,7 @@ function CurpGeneratorView({ records }: Props) {
       );
       setError(null);
       await addRecords(people);
+      await refetch();
     } catch (e) {
       setError(
         e instanceof ValidationError
@@ -72,14 +73,14 @@ function CurpGeneratorView({ records }: Props) {
           {t('common:generate')}
         </Button>
       </View>
-      <CurpRecordList records={records} onToggleUsed={toggleUsed} />
+      <CurpRecordList
+        records={data}
+        isLoading={isLoading}
+        onToggleUsed={toggleUsed}
+      />
     </View>
   );
 }
-
-export const CurpGeneratorScreen = withObservables([], () => ({
-  records: observeAll(),
-}))(CurpGeneratorView);
 
 const styles = StyleSheet.create({
   screen: { flex: 1, padding: spacing.lg, backgroundColor: colors.white },

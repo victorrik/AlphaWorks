@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { withObservables } from '@nozbe/watermelondb/react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, RecordList, Text, Title } from '../components';
 import { colors, spacing } from '../theme';
 import { generateByRange, ValidationError } from '../services/age';
-import { addRecords, observeBySource, toggleUsed } from '../db/ageRecordRepo';
-import type { AgeRecord } from '../db/models/AgeRecord';
+import { addRecords, fetchBySource, setUsed } from '../db/ageRecordRepo';
+import { useRecords } from '../hooks/useRecords';
 
-type Props = { records: AgeRecord[] };
+const query = { fetch: () => fetchBySource('range'), setUsed };
 
-function RangeGeneratorView({ records }: Props) {
+export function RangeGeneratorScreen() {
   const { t } = useTranslation(['range', 'common']);
+  const { data, isLoading, refetch, toggleUsed } = useRecords(query);
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
   const [count, setCount] = useState('');
@@ -27,6 +27,7 @@ function RangeGeneratorView({ records }: Props) {
       );
       setError(null);
       await addRecords('range', generated);
+      await refetch();
     } catch (e) {
       setError(
         e instanceof ValidationError
@@ -71,14 +72,14 @@ function RangeGeneratorView({ records }: Props) {
           {t('common:generate')}
         </Button>
       </View>
-      <RecordList records={records} onToggleUsed={toggleUsed} />
+      <RecordList
+        records={data}
+        isLoading={isLoading}
+        onToggleUsed={toggleUsed}
+      />
     </View>
   );
 }
-
-export const RangeGeneratorScreen = withObservables([], () => ({
-  records: observeBySource('range'),
-}))(RangeGeneratorView);
 
 const styles = StyleSheet.create({
   screen: { flex: 1, padding: spacing.lg, backgroundColor: colors.white },

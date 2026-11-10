@@ -1,5 +1,4 @@
 import { Q } from '@nozbe/watermelondb';
-import { Observable } from 'rxjs';
 import { database } from './index';
 import { AgeRecord } from './models/AgeRecord';
 import { GeneratedRecord } from '../services/age';
@@ -8,11 +7,15 @@ export type Source = 'range' | 'calculator';
 
 const records = database.get<AgeRecord>('age_records');
 
+// Fila plana para el estado de la UI (los Model de WatermelonDB son mutables).
+export type AgeRow = { id: string; birthDate: string; age: number; used: boolean };
+
 // Orden desc por created_at (Req 5.2).
-export function observeBySource(source: Source): Observable<AgeRecord[]> {
-  return records
+export async function fetchBySource(source: Source): Promise<AgeRow[]> {
+  const rows = await records
     .query(Q.where('source', source), Q.sortBy('created_at', Q.desc))
-    .observeWithColumns(['used']);
+    .fetch();
+  return rows.map(r => ({ id: r.id, birthDate: r.birthDate, age: r.age, used: r.used }));
 }
 
 const dedupKey = (birthDate: string, age: number) => `${birthDate}|${age}`;
@@ -57,6 +60,7 @@ export async function addRecords(
   return fresh.length;
 }
 
-export function toggleUsed(record: AgeRecord): Promise<void> {
-  return record.toggleUsed();
+export async function setUsed(id: string, used: boolean): Promise<void> {
+  const record = await records.find(id);
+  await record.setUsed(used);
 }

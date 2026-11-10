@@ -12,9 +12,9 @@ export class CurpRecord extends Model {
   @text('curp') curp: string;
   @field('used') used: boolean;
   @date('created_at') createdAt: Date;
-  @writer async toggleUsed() {
+  @writer async setUsed(used: boolean) {
     await this.update(record => {
-      record.used = !record.used;
+      record.used = used;
     });
   }
 }
